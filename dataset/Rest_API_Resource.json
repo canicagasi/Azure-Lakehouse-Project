@@ -1,0 +1,19 @@
+{
+	"name": "Rest_API_Resource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "restsource",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "convert?q=USD_@{item().Currency}&compact=ultra&apiKey=7fccb0e3980deb1b4cc3",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

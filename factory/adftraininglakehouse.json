@@ -1,0 +1,9 @@
+{
+	"name": "adftraininglakehouse",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "96c9e2cf-6b0f-4553-8b2b-2dd4e73737e1",
+		"tenantId": "9097246d-8361-4ec1-a70b-2fa18d9664a8"
+	}
+}
