@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adftraininglakehouse"
+		},
+		"azuretraininglakehouse_accountKey": {
+			"value": ""
+		},
+		"salesdbsource_connectionString": {
+			"value": ""
+		},
+		"websitetrackinglogs_connectionString": {
+			"value": ""
+		},
+		"Curation Spark Cluster_accessToken": {
+			"value": ""
+		},
+		"azuretraininglakehouse_properties_typeProperties_url": {
+			"value": "https://azuretraininglakehouse.dfs.core.windows.net"
+		},
+		"httpsource_properties_typeProperties_url": {
+			"value": "https://github.com/PacktPublishing/Data-Engineering-with-Apache-Spark-Delta-Lake-and-Lakehouse/blob/main/project/prep/iplocation/IP2LOCATION-LITE-DB1.CSV"
+		},
+		"restsource_properties_typeProperties_url": {
+			"value": "https://free.currconv.com/api/v7/convert?"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
