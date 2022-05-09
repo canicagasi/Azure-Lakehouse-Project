@@ -1,0 +1,242 @@
+{
+	"name": "electroniz_aggregation_pipeline",
+	"properties": {
+		"description": "This pipeline will aggregate data from the sales database, currency conversion, geo-location and e-commerce website tracking.",
+		"activities": [
+			{
+				"name": "Get Secret",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/0578c7e51381461993e7beeec223d0af?api-version=7.0",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Drop Gold Layer Tables",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Get Secret",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[drop_gold_tables]",
+					"storedProcedureParameters": {
+						"goldns": {
+							"value": "@pipeline().GOLD_LAYER_NAMESPACE:",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Synapse Serverless",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Create Synapse Credentials",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Drop Gold Layer Tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[create_synapse_creds]",
+					"storedProcedureParameters": {
+						"format": {
+							"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+							"type": "String"
+						},
+						"extds": {
+							"value": "@pipeline().parameters.EXT_DATA_SOURCE",
+							"type": "String"
+						},
+						"creds": {
+							"value": "@pipeline().parameters.EXT_CREDENTIALS",
+							"type": "String"
+						},
+						"secret": {
+							"value": "@activity('Get Secret').output.value",
+							"type": "String"
+						},
+						"location": {
+							"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Synapse Serverless",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Create Silver Layer Views",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Create Synapse Credentials",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[create_silver_views]",
+					"storedProcedureParameters": {
+						"silverns": {
+							"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+							"type": "String"
+						},
+						"location": {
+							"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Synapse Serverless",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Cleanup Gold Data",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Create Silver Layer Views",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "gold_data",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Create Gold Layer Tables",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Cleanup Gold Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[drop_gold_tables]",
+					"storedProcedureParameters": {
+						"goldns": {
+							"value": "@pipeline().parameters.GOLD_LAYER_NAMESPACE",
+							"type": "String"
+						},
+						"format": {
+							"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+							"type": "String"
+						},
+						"extds": {
+							"value": "@pipeline().parameters.EXT_DATA_SOURCE:",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Synapse Serverless",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"EXT_TAB_FILE_FORMAT": {
+				"type": "string"
+			},
+			"EXT_DATA_SOURCE": {
+				"type": "string"
+			},
+			"EXT_CREDENTIALS": {
+				"type": "string"
+			},
+			"EXT_TAB_LOCATION": {
+				"type": "string"
+			},
+			"SILVER_LAYER_NAMESPACE": {
+				"type": "string"
+			},
+			"GOLD_LAYER_NAMESPACE": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
