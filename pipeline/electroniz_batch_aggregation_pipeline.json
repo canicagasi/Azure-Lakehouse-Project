@@ -1,5 +1,5 @@
 {
-	"name": "electroniz_aggregation_pipeline",
+	"name": "electroniz_batch_aggregation_pipeline",
 	"properties": {
 		"description": "This pipeline will aggregate data from the sales database, currency conversion, geo-location and e-commerce website tracking.",
 		"activities": [
@@ -47,7 +47,10 @@
 					"storedProcedureName": "[dbo].[drop_gold_tables]",
 					"storedProcedureParameters": {
 						"goldns": {
-							"value": "@pipeline().GOLD_LAYER_NAMESPACE:",
+							"value": {
+								"value": "@pipeline().GOLD_LAYER_NAMESPACE:",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -80,23 +83,38 @@
 					"storedProcedureName": "[dbo].[create_synapse_creds]",
 					"storedProcedureParameters": {
 						"format": {
-							"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+							"value": {
+								"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"extds": {
-							"value": "@pipeline().parameters.EXT_DATA_SOURCE",
+							"value": {
+								"value": "@pipeline().parameters.EXT_DATA_SOURCE",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"creds": {
-							"value": "@pipeline().parameters.EXT_CREDENTIALS",
+							"value": {
+								"value": "@pipeline().parameters.EXT_CREDENTIALS",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"secret": {
-							"value": "@activity('Get Secret').output.value",
+							"value": {
+								"value": "@activity('Get Secret').output.value",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"location": {
-							"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+							"value": {
+								"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -129,11 +147,17 @@
 					"storedProcedureName": "[dbo].[create_silver_views]",
 					"storedProcedureParameters": {
 						"silverns": {
-							"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+							"value": {
+								"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"location": {
-							"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+							"value": {
+								"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
@@ -198,15 +222,24 @@
 					"storedProcedureName": "[dbo].[drop_gold_tables]",
 					"storedProcedureParameters": {
 						"goldns": {
-							"value": "@pipeline().parameters.GOLD_LAYER_NAMESPACE",
+							"value": {
+								"value": "@pipeline().parameters.GOLD_LAYER_NAMESPACE",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"format": {
-							"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+							"value": {
+								"value": "@pipeline().parameters.EXT_TAB_FILE_FORMAT",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"extds": {
-							"value": "@pipeline().parameters.EXT_DATA_SOURCE:",
+							"value": {
+								"value": "@pipeline().parameters.EXT_DATA_SOURCE:",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
