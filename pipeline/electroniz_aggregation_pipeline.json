@@ -48,7 +48,7 @@
 					"storedProcedureParameters": {
 						"goldns": {
 							"value": {
-								"value": "@pipeline().GOLD_LAYER_NAMESPACE:",
+								"value": "@pipeline().parameters.GOLD_LAYER_NAMESPACE",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -112,7 +112,7 @@
 						},
 						"location": {
 							"value": {
-								"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+								"value": "@pipeline().parameters.EXT_TAB_LOCATION",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -155,7 +155,7 @@
 						},
 						"location": {
 							"value": {
-								"value": "@pipeline().parameters.EXT_TAB_LOCATION:",
+								"value": "@pipeline().parameters.EXT_TAB_LOCATION",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -237,7 +237,7 @@
 						},
 						"extds": {
 							"value": {
-								"value": "@pipeline().parameters.EXT_DATA_SOURCE:",
+								"value": "@pipeline().parameters.EXT_DATA_SOURCE",
 								"type": "Expression"
 							},
 							"type": "String"
