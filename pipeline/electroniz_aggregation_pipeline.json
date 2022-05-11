@@ -1,5 +1,5 @@
 {
-	"name": "electroniz_batch_aggregation_pipeline",
+	"name": "electroniz_aggregation_pipeline",
 	"properties": {
 		"description": "This pipeline will aggregate data from the sales database, currency conversion, geo-location and e-commerce website tracking.",
 		"activities": [
