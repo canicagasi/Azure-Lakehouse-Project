@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adftraininglakehouse"
 		},
+		"Curation Spark Cluster_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Curation Spark Cluster'"
+		},
+		"Synapse Serverless_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Synapse Serverless'"
+		},
 		"azuretraininglakehouse_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'azuretraininglakehouse'"
@@ -18,10 +26,6 @@
 		"websitetrackinglogs_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'websitetrackinglogs'"
-		},
-		"Curation Spark Cluster_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'Curation Spark Cluster'"
 		},
 		"azuretraininglakehouse_properties_typeProperties_url": {
 			"type": "string",
@@ -62,6 +66,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"Curation Spark Cluster_accessToken": {
+						"value": "[parameters('Curation Spark Cluster_accessToken')]"
+					},
+					"Synapse Serverless_connectionString": {
+						"value": "[parameters('Synapse Serverless_connectionString')]"
+					},
 					"azuretraininglakehouse_accountKey": {
 						"value": "[parameters('azuretraininglakehouse_accountKey')]"
 					},
@@ -70,9 +80,6 @@
 					},
 					"websitetrackinglogs_connectionString": {
 						"value": "[parameters('websitetrackinglogs_connectionString')]"
-					},
-					"Curation Spark Cluster_accessToken": {
-						"value": "[parameters('Curation Spark Cluster_accessToken')]"
 					},
 					"azuretraininglakehouse_properties_typeProperties_url": {
 						"value": "[parameters('azuretraininglakehouse_properties_typeProperties_url')]"

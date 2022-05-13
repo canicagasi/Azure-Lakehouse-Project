@@ -5,6 +5,12 @@
 		"factoryName": {
 			"value": "adftraininglakehouse"
 		},
+		"Curation Spark Cluster_accessToken": {
+			"value": ""
+		},
+		"Synapse Serverless_connectionString": {
+			"value": ""
+		},
 		"azuretraininglakehouse_accountKey": {
 			"value": ""
 		},
@@ -12,9 +18,6 @@
 			"value": ""
 		},
 		"websitetrackinglogs_connectionString": {
-			"value": ""
-		},
-		"Curation Spark Cluster_accessToken": {
 			"value": ""
 		},
 		"azuretraininglakehouse_properties_typeProperties_url": {
