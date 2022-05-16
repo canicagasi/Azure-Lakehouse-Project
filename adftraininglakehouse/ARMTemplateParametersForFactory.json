@@ -11,9 +11,6 @@
 		"Synapse Serverless_connectionString": {
 			"value": ""
 		},
-		"azuretraininglakehouse_accountKey": {
-			"value": ""
-		},
 		"salesdbsource_connectionString": {
 			"value": ""
 		},

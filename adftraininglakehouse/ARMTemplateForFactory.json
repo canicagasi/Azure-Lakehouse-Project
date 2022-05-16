@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Synapse Serverless'"
 		},
-		"azuretraininglakehouse_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'azuretraininglakehouse'"
-		},
 		"salesdbsource_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'salesdbsource'"
@@ -64,7 +60,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/5569ead863db4b23a1f6f364e2abd3a8?api-version=7.0",
+							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/3c48a209aa0f49afac01b11dc9a1d18d?api-version=7.0",
 							"method": "GET",
 							"headers": {},
 							"authentication": {
@@ -306,22 +302,28 @@
 				},
 				"parameters": {
 					"EXT_TAB_FILE_FORMAT": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "parquetformat"
 					},
 					"EXT_DATA_SOURCE": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "trainingds"
 					},
 					"EXT_CREDENTIALS": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "trainingcreds"
 					},
 					"EXT_TAB_LOCATION": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "https://azuretraininglakehouse.blob.core.windows.net"
 					},
 					"SILVER_LAYER_NAMESPACE": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "silver"
 					},
 					"GOLD_LAYER_NAMESPACE": {
-						"type": "string"
+						"type": "string",
+						"defaultValue": "gold"
 					}
 				},
 				"annotations": []
@@ -1327,11 +1329,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('azuretraininglakehouse_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('azuretraininglakehouse_accountKey')]"
-					}
+					"url": "[parameters('azuretraininglakehouse_properties_typeProperties_url')]"
 				}
 			},
 			"dependsOn": []

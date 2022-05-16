@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Synapse Serverless'"
 		},
-		"azuretraininglakehouse_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'azuretraininglakehouse'"
-		},
 		"salesdbsource_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'salesdbsource'"
@@ -71,9 +67,6 @@
 					},
 					"Synapse Serverless_connectionString": {
 						"value": "[parameters('Synapse Serverless_connectionString')]"
-					},
-					"azuretraininglakehouse_accountKey": {
-						"value": "[parameters('azuretraininglakehouse_accountKey')]"
 					},
 					"salesdbsource_connectionString": {
 						"value": "[parameters('salesdbsource_connectionString')]"
