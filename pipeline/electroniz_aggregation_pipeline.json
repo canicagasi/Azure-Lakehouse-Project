@@ -252,22 +252,28 @@
 		],
 		"parameters": {
 			"EXT_TAB_FILE_FORMAT": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "parquetformat"
 			},
 			"EXT_DATA_SOURCE": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "trainingds"
 			},
 			"EXT_CREDENTIALS": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "trainingcreds"
 			},
 			"EXT_TAB_LOCATION": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://azuretraininglakehouse.blob.core.windows.net"
 			},
 			"SILVER_LAYER_NAMESPACE": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "silver"
 			},
 			"GOLD_LAYER_NAMESPACE": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "gold"
 			}
 		},
 		"annotations": []
