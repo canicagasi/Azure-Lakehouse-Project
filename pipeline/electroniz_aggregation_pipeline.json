@@ -16,7 +16,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/5569ead863db4b23a1f6f364e2abd3a8?api-version=7.0",
+					"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/3c48a209aa0f49afac01b11dc9a1d18d?api-version=7.0",
 					"method": "GET",
 					"authentication": {
 						"type": "MSI",
