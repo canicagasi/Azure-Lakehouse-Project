@@ -60,7 +60,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/3c48a209aa0f49afac01b11dc9a1d18d?api-version=7.0",
+							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/9002b15d934f458196ffe205347b1496?api-version=7.0",
 							"method": "GET",
 							"headers": {},
 							"authentication": {
@@ -170,49 +170,6 @@
 						}
 					},
 					{
-						"name": "Create Silver Layer Views",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Create Synapse Credentials",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[create_silver_views]",
-							"storedProcedureParameters": {
-								"silverns": {
-									"value": {
-										"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"location": {
-									"value": {
-										"value": "@pipeline().parameters.EXT_TAB_LOCATION",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "Synapse Serverless",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
 						"name": "Cleanup Gold Data",
 						"type": "Delete",
 						"dependsOn": [
@@ -284,6 +241,49 @@
 								"extds": {
 									"value": {
 										"value": "@pipeline().parameters.EXT_DATA_SOURCE",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "Synapse Serverless",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Create Silver Layer Views",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Create Synapse Credentials",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[create_silver_views]",
+							"storedProcedureParameters": {
+								"silverns": {
+									"value": {
+										"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"location": {
+									"value": {
+										"value": "@pipeline().parameters.EXT_TAB_LOCATION",
 										"type": "Expression"
 									},
 									"type": "String"
