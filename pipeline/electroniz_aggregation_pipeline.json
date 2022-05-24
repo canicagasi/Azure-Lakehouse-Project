@@ -125,59 +125,9 @@
 				}
 			},
 			{
-				"name": "Create Silver Layer Views",
-				"type": "SqlServerStoredProcedure",
-				"dependsOn": [
-					{
-						"activity": "Create Synapse Credentials",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"storedProcedureName": "[dbo].[create_silver_views]",
-					"storedProcedureParameters": {
-						"silverns": {
-							"value": {
-								"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
-								"type": "Expression"
-							},
-							"type": "String"
-						},
-						"location": {
-							"value": {
-								"value": "@pipeline().parameters.EXT_TAB_LOCATION",
-								"type": "Expression"
-							},
-							"type": "String"
-						}
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "Synapse Serverless",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
 				"name": "Cleanup Gold Data",
 				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "Create Silver Layer Views",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
