@@ -229,11 +229,17 @@
 					"storedProcedureName": "[dbo].[create_silver_views]",
 					"storedProcedureParameters": {
 						"silverns": {
-							"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+							"value": {
+								"value": "@pipeline().parameters.SILVER_LAYER_NAMESPACE",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"location": {
-							"value": "@pipeline.parameters.EXT_TAB_LOCATION",
+							"value": {
+								"value": "@pipeline().parameters.EXT_TAB_LOCATION",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
