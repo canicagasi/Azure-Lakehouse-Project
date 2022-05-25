@@ -577,7 +577,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/9002b15d934f458196ffe205347b1496?api-version=7.0",
+							"url": "https://hayricankeyvault.vault.azure.net/secrets/ADLSSASKEY/78ee5668ed394f7291feb77baaf49bef?api-version=7.0",
 							"method": "GET",
 							"headers": {},
 							"authentication": {
@@ -1320,7 +1320,10 @@
 										{
 											"referenceName": "SalesDelimitedText",
 											"type": "DatasetReference",
-											"parameters": {}
+											"parameters": {
+												"FileExt": "csv",
+												"FileTime": "@pipeline().TriggerTime"
+											}
 										}
 									]
 								},
